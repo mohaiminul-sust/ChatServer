@@ -63,13 +63,13 @@ public class server_form extends javax.swing.JFrame {
 
             try {
                 while (!(inputMessage = reader.readLine()).isEmpty()) {
-                    //serverStatus.append("IN: "+inputMessage+"\n");
+                    serverStatus.append("IN: "+inputMessage+"\n");
                     messageParts = inputMessage.split(":");
 
                     for (String messagePart : messageParts) {
                         serverStatus.append(messagePart + "\n");
                     }
-
+                    
                     if (messageParts[2].equals("Connect")) {
                         broadcast(messageParts[0] + ":" + messageParts[1] + ":" + "Chat");
                         addUser(messageParts[0], client);
@@ -94,10 +94,13 @@ public class server_form extends javax.swing.JFrame {
                         int indx = users.indexOf(messageParts[3]);
                         String message = messageParts[0]+":"+messageParts[1]+":"+messageParts[2];
                         personalChat(message, indx);
-                    }else if(messageParts[2].equals("Go")){
+                    }else if(messageParts[2].equals("Got")){
+                        serverStatus.append("sender is : "+messageParts[1]+"\n");
                         int indx = users.indexOf(messageParts[1]);
-                        String message = messageParts[0]+":"+messageParts[1]+":"+messageParts[2];
+                        serverStatus.append("Go 1\n");
+                        String message = messageParts[0]+":"+messageParts[1]+":Got";
                         personalChat(message, indx);
+                        serverStatus.append("Go 2\n");
                     }else {
                         serverStatus.append("Chat condition not held!!\n");
                     }
@@ -105,7 +108,7 @@ public class server_form extends javax.swing.JFrame {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                serverStatus.append("Lost Connection with " + client);
+                serverStatus.append("Lost Connection with " + users.get(clientOutputStream.indexOf(client)));
                 clientOutputStream.remove(client);
             }
         }
@@ -304,6 +307,7 @@ public class server_form extends javax.swing.JFrame {
             clientOutputStream = new ArrayList();
             users = new ArrayList();
             //get port from textf
+            port = Integer.parseInt(portTextField.getText());
             try {
                 ServerSocket serverSocket = new ServerSocket(port);
 
@@ -314,7 +318,7 @@ public class server_form extends javax.swing.JFrame {
 
                     Thread listenThread = new Thread(new ClientHandler(clientSocket, clientWriter));
                     listenThread.start();
-                    serverStatus.append("Connection established.");
+                    serverStatus.append("Connection established on port : "+port+"\n");
                 }
             } catch (Exception e) {
                 //e.printStackTrace();
@@ -340,7 +344,6 @@ public class server_form extends javax.swing.JFrame {
 
     public void removeUser(String name) {
         String message;
-        int index = users.indexOf(name);
         users.remove(name);
         listModel.removeElement(name);
         message = name + ": :Disconnect";
