@@ -120,7 +120,7 @@ public class server_form extends javax.swing.JFrame {
 
     public server_form() {
         listModel = new DefaultListModel();
-        listModel.addElement("ALL USER");
+        listModel.addElement("ALL");
         initComponents();
     }
 
