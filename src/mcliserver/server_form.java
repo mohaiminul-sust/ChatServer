@@ -82,6 +82,13 @@ public class server_form extends javax.swing.JFrame {
                         int indx = users.indexOf(messageParts[3]);
                         String message = messageParts[0] + ":" + messageParts[1]+":Chat";
                         personalChat(message, indx);
+                    }else if(messageParts[2].equals("Got")){
+                        serverStatus.append("sender is : "+messageParts[1]+"\n");
+                        int indx = users.indexOf(messageParts[1]);
+                        serverStatus.append("Go 1\n");
+                        String message = messageParts[0]+":"+messageParts[1]+":Got";
+                        personalChat(message, indx);
+                        serverStatus.append("Go 2\n");
                     } else if (messageParts[2].equals("Send")) {
                        int indx = users.indexOf(messageParts[1]);
                        String message = inputMessage;
@@ -94,13 +101,6 @@ public class server_form extends javax.swing.JFrame {
                         int indx = users.indexOf(messageParts[3]);
                         String message = messageParts[0]+":"+messageParts[1]+":"+messageParts[2];
                         personalChat(message, indx);
-                    }else if(messageParts[2].equals("Got")){
-                        serverStatus.append("sender is : "+messageParts[1]+"\n");
-                        int indx = users.indexOf(messageParts[1]);
-                        serverStatus.append("Go 1\n");
-                        String message = messageParts[0]+":"+messageParts[1]+":Got";
-                        personalChat(message, indx);
-                        serverStatus.append("Go 2\n");
                     }else {
                         serverStatus.append("Chat condition not held!!\n");
                     }
@@ -148,7 +148,7 @@ public class server_form extends javax.swing.JFrame {
 
         serverStatus.setBackground(new java.awt.Color(50, 48, 48));
         serverStatus.setColumns(20);
-        serverStatus.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
+        serverStatus.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
         serverStatus.setLineWrap(true);
         serverStatus.setRows(5);
         serverStatus.setToolTipText("status window");
