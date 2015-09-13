@@ -114,10 +114,6 @@ public class server_form extends javax.swing.JFrame {
         }
     }
 
-    
-
-   
-
     public server_form() {
         listModel = new DefaultListModel();
         listModel.addElement("ALL");
@@ -148,7 +144,7 @@ public class server_form extends javax.swing.JFrame {
 
         serverStatus.setBackground(new java.awt.Color(50, 48, 48));
         serverStatus.setColumns(20);
-        serverStatus.setFont(new java.awt.Font("Segoe UI Light", 0, 14)); // NOI18N
+        serverStatus.setFont(new java.awt.Font("Segoe UI Light", 0, 12)); // NOI18N
         serverStatus.setLineWrap(true);
         serverStatus.setRows(5);
         serverStatus.setToolTipText("status window");
