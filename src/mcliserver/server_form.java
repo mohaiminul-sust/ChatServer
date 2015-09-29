@@ -89,15 +89,41 @@ public class server_form extends javax.swing.JFrame {
                         String message = messageParts[0]+":"+messageParts[1]+":Got";
                         personalChat(message, indx);
                         serverStatus.append("Go 2\n");
-                    } else if (messageParts[2].equals("Send")) {
+                    }else if(messageParts[2].equals("Got-Voice")){
+                        serverStatus.append("sender is : "+messageParts[1]+"\n");
+                        int indx = users.indexOf(messageParts[1]);
+                        serverStatus.append("Go 1\n");
+                        String message = messageParts[0]+":"+messageParts[1]+":Got-Voice";
+                        personalChat(message, indx);
+                        serverStatus.append("Go 2\n");
+                    }
+                    else if (messageParts[2].equals("Send")) {
                        int indx = users.indexOf(messageParts[1]);
                        String message = inputMessage;
                         personalChat(message, indx);
-                    } else if (messageParts[3].equals("Confd")) {
+                    }else if(messageParts[2].equals("Voice")){
+                       int indx = users.indexOf(messageParts[1]);
+                       String message = inputMessage;
+                        personalChat(message, indx);
+                        serverStatus.append(messageParts[0]+" is going to send a voice sms to "+messageParts[1]+"\n");
+                    }
+                    else if(messageParts[2].equals("Fname")){
+                        int indx = users.indexOf(messageParts[3]);
+                        String message = messageParts[0]+":"+messageParts[1]+":"+messageParts[2];
+                        personalChat(message, indx);
+                    }
+                    else if (messageParts[3].equals("Confd")) {
                         int indx = users.indexOf(messageParts[2]);
                         String message = messageParts[0]+":"+messageParts[1]+":File";
                         personalChat(message, indx);
-                    }else if(messageParts[2].equals("Fname")){
+                    }
+                    else if (messageParts[3].equals("con-Voice")) {
+                        int indx = users.indexOf(messageParts[2]);
+                        String message = messageParts[0]+":"+messageParts[1]+":con-Voice";
+                        personalChat(message, indx);
+                    }
+                    
+                    else if(messageParts[2].equals("Voice-sms")){
                         int indx = users.indexOf(messageParts[3]);
                         String message = messageParts[0]+":"+messageParts[1]+":"+messageParts[2];
                         personalChat(message, indx);
@@ -200,7 +226,7 @@ public class server_form extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(portTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
